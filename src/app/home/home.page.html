@@ -1,0 +1,215 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-left">
+      <span>Olá, Jhonatan</span>
+      <ion-button (click)="toggleBlocks()" color="light" fill="clear" size="small">
+        <ion-icon slot="icon-only" [name]="initialStep > 0 ? 'arrow-up-outline' : 'arrow-down-outline'"></ion-icon>
+      </ion-button>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="primary" class="ion-padding" [scrollY]="!swipping">
+ <div #backgrounds class="background opacity-transition">
+    <div class="bank-information ion-text-center">
+      <img class="qrcode" src="/assets/qr-code.png" alt="">
+      <span>Banco <strong>000 - Nu Pagamentos S.A</strong></span>
+      <span>Agência <strong>0000</strong></span>
+      <span>Conta <strong>000000-0</strong></span>
+    </div>
+
+    <ion-list lines="full">
+      <ion-item *ngFor="let item of items" detail>
+        <ion-icon slot="start" [name]="item.icon"></ion-icon>
+        <ion-label>{{item.text}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-button class="logout" color="light" expand="block" fill="outline">
+      Sair da Conta
+    </ion-button>
+  </div>
+
+  <div #blocks  class="blocks opacity-transition" [ngClass]="fixedBlocks() ? 'fixed' : null">
+    <ion-card #swipeDown>
+      <ion-item class="ion-margin-vertical" lines="none">
+        <ion-icon slot="start" name="card-outline"></ion-icon>
+        <ion-label>Cartão de Crédito</ion-label>
+      </ion-item>
+      <ion-card-content class="ion-no-padding">
+        <div class="ion-padding ion-margin-vertical cash">
+          <span class="blue">Fatura Atual</span>
+          <span class="blue value">R$ 57,55</span>
+          <span>Limite disponível <span class="green">R$ 2000,00</span></span>
+        </div>
+      </ion-card-content>
+
+      <div class="ion-padding-vertical footer">
+        <ion-item color="light" lines="none" detail>
+          <ion-icon slot="start" name="pizza-outline"></ion-icon>
+          <ion-label class="ion-text-wrap">Compra mais recente em Ifood *Ifood no valor de R$ 54,50</ion-label>
+        </ion-item>
+      </div>
+    </ion-card>
+
+    <ion-card>
+      <ion-item class="ion-margin-vertical" lines="none">
+        <ion-icon slot="start" name="cash-outline"></ion-icon>
+        <ion-label>Conta</ion-label>
+        <ion-button color="dark" fill="clear" slot="end">
+          <ion-icon slot="icon-only" name="eye-off-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-card-content class="ion-no-padding">
+        <div class="ion-padding ion-margin-vertical cash">
+          <span class="blue">Saldo dísponivel</span>
+          <ion-text color="dark">
+            <span class="value">R$ 197,51</span>
+          </ion-text>
+        </div>
+        <div class="ion-padding-vertical footer">
+          <ion-item color="light" lines="none" detail>
+            <ion-icon slot="start" name="barcode-outline"></ion-icon>
+            <ion-label class="ion-text-wrap">Boleto de R$ 322,55 pago na segunda</ion-label>
+          </ion-item>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="loan">
+      <ion-item class="ion-margin-vertical" lines="none">
+        <ion-icon slot="start" name="wallet-outline"></ion-icon>
+        <ion-label>Empréstimo</ion-label>
+      </ion-item>
+
+      <ion-card-content class="ion-no-padding">
+        <div class="ion-padding info">
+          <span class="show ion-text-justify">Valor disponivel de até</span>
+          <span class="value"><strong>R$ 12.500,00</strong></span>
+        </div>
+        <div class="ion-padding-start ion-margin-bottom">
+          <ion-button slot="start" fill="outline">
+            <strong>Simular Empréstimo</strong>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="insurance">
+      <ion-item class="ion-margin-vertical" lines="none">
+        <ion-icon slot="start" name="umbrella-outline"></ion-icon>
+        <ion-label class="main-text">Seguro de vida</ion-label>
+      </ion-item>
+
+      <ion-card-content class="ion-no-padding">
+        <div class="ion-padding info">
+          <span class="show ion-text-justify">Conheça Nubank Vida: um seguro simples e que cabe no bolso.</span>
+        </div>
+        <div class="ion-padding-start ion-margin-bottom">
+          <ion-button class="ion-text-uppercase btn" color="purple" slot="start" fill="outline">
+            <strong>Conhecer</strong>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="payment-wpp">
+      <ion-item class="ion-margin-vertical" lines="none">
+        <ion-icon slot="start" name="logo-whatsapp"></ion-icon>
+        <ion-label>Pagamentos no WhatsApp</ion-label>
+      </ion-item>
+      <ion-card-content class="ion-no-padding">
+        <div class="ion-padding-start invite">
+          <div class="about">
+            <span class="ion-text-justify info">
+              <strong>
+                Envie e receba dinheiro
+                sem sair da conversa
+              </strong>
+            </span>
+          </div>
+          <div class="text">
+            <span class="ion-text-justify value">
+              Os pagamentos no WhatsApp são seguros, rápidos e sem
+              tarifas. Tão fácil quanto mandar uma foto de "bom dia"
+              no grupo da família.
+            </span>
+          </div>
+        </div>
+        <div class="ion-padding-start ion-margin-vertical">
+          <ion-button class="ion-margin-vertical btn" slot="start" fill="outline">
+            <strong>Quero conhecer</strong>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="google-pay">
+      <ion-item class="ion-margin-vertical" lines="none">
+        <ion-icon slot="start" name="id-card-outline"></ion-icon>
+        <ion-label class="main-text">Google Pay</ion-label>
+      </ion-item>
+
+      <ion-card-content class="ion-no-padding">
+        <div class="ion-padding info">
+          <span class="show">Use o Google Pay com seus cartões Nubank</span>
+        </div>
+        <div class="ion-padding-start ion-margin-bottom">
+          <ion-button class="ion-text-uppercase btn" color="purple" slot="start" fill="outline">
+            <strong>Registrar Meu Cartão</strong>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="legal-entity">
+      <ion-item class="ion-margin-vertical" lines="none">
+        <ion-icon slot="start" name="home-outline"></ion-icon>
+        <ion-label class="main-text">Conta PJ</ion-label>
+      </ion-item>
+
+      <ion-card-content class="ion-no-padding">
+        <div class="ion-padding info">
+          <span class="ion-text-justify show">A gente te ajuda a gerenciar suas finanças de um jeito fácil para fazer seu negócio acontecer.</span>
+        </div>
+        <div class="ion-padding-start ion-margin-bottom">
+          <ion-button class="ion-text-uppercase btn" color="purple" slot="start" fill="outline">
+            <strong>Pedir Conta PJ</strong>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="rewards">
+      <ion-card-content class="ion-text-center">
+        <ion-icon class="gift" name="gift-outline"></ion-icon>
+        <div class="ion-margin-vertical">
+          <ion-text color="dark">
+            <p class="title">
+              <strong>Nubank Rewards</strong>
+            </p>
+            <p>Acumule pontos que nunca expiram por passagens aéreas que você realmente usa.</p>
+          </ion-text>
+        </div>
+
+        <ion-button expand="block" fill="outline">
+          <strong>ATIVE O SEU REWARDS</strong>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border" [ngClass]="fixedBlocks() ? 'hidden' : 'null'">
+  <ion-toolbar class="ion-no-margin ion-padding-vertical" color="primary">
+    <ion-slides class="opacity-transition" [options]="slideOptions">
+      <ion-slide *ngFor="let option of options">
+        <div class="container ion-text-left">
+
+          <ion-icon [name]="option.icon"></ion-icon>
+          <span>{{option.text}}</span>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </ion-toolbar>
+</ion-footer>
